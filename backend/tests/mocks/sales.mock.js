@@ -49,12 +49,18 @@ const salesFromService = [
     quantity: 15,
   },
 ];
-const salesFromServiceId = {
-  id: 1,
-  date: '2023-11-23T18:56:47.000Z',
-  productId: 1,
-  quantity: 5,
-};
+const salesFromServiceId = [
+  {
+    productId: 1,
+    quantity: 5,
+    date: '2023-11-01T12:54:09.000Z',
+  },
+  {
+    productId: 2,
+    quantity: 10,
+    date: '2023-11-01T12:54:09.000Z',
+  },
+];
 
 const salesFromServiceInsert = [
   {

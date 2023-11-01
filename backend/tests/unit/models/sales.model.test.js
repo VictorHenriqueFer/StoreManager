@@ -30,7 +30,7 @@ describe('Testa o model de vendas', function () {
 
     const sales = await salesModel.findById(1);
 
-    expect(sales).to.deep.equal(salesFromId[0][0]);
+    expect(sales).to.deep.equal(salesFromId[0]);
   });
   afterEach(function () {
     sinon.restore();

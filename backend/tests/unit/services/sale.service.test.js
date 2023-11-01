@@ -26,20 +26,13 @@ describe('Testa o service de vendas', function () {
     const sales = await salesServices.findById(1);
 
     expect(sales.data).to.be.equal(salesFromServiceId);
+    expect(sales.status).to.be.equal(200);
   });
   it('Testa se o retorno do status code da getAll está correto', async function () {
     sinon.stub(salesModel, 'getAll')
       .resolves({ status: 200 });
 
     const sales = await salesServices.getAll();
-
-    expect(sales.data).to.be.deep.equal({ status: 200 });
-  });
-  it('Testa se o retorno do status code da findById está correto', async function () {
-    sinon.stub(salesModel, 'findById')
-      .resolves({ status: 200 });
-
-    const sales = await salesServices.findById(1);
 
     expect(sales.data).to.be.deep.equal({ status: 200 });
   });

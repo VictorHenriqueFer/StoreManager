@@ -5,14 +5,13 @@ const getAll = async () => {
   const [sales] = await connection.execute(`
 SELECT sp.sale_id, s.date, sp.product_id, sp.quantity
 FROM sales_products AS sp
-INNER JOIN sales AS s ON sp.sale_id = s.id
-ORDER BY sp.sale_id, sp.product_id;`);
+INNER JOIN sales AS s ON sp.sale_id = s.id;`);
   return camelize(sales);
 };
 
 const findById = async (id) => {
-  const [[sale]] = await connection.execute(`
-SELECT sp.product_id, sp.sale_id, sp.quantity, s.date
+  const [sale] = await connection.execute(`
+SELECT sp.product_id, sp.quantity, s.date
 FROM sales_products AS sp
 INNER JOIN sales AS s ON sp.sale_id = s.id
 WHERE sp.sale_id = ?;`, [id]);
