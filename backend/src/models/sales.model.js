@@ -33,9 +33,27 @@ INSERT INTO sales_products (product_id, sale_id, quantity) VALUES (?, ?, ?);`,
   return sale;
 };
 
+const deleteSale = async (id) => {
+  await connection.execute(
+    'DELETE FROM sales WHERE id = ?',
+    [id],
+  );
+  return { id };
+};
+
+const updateSale = async (saleId, sale) => {
+  await connection.execute(
+    'UPDATE sales_products SET quantity = ? WHERE sale_id = ? AND product_id = ?',
+    [sale.quantity, saleId, sale.productId],
+  );
+  return sale;
+};
+
 module.exports = {
   getAll,
   findById,
   createSale,
   createSalesProducts,
+  deleteSale,
+  updateSale,
 };
