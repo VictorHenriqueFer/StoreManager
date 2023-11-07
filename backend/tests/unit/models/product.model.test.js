@@ -62,6 +62,23 @@ describe('Testa o model de produtos', function () {
 
     expect(products).to.be.deep.equal({ id: 1, name: 'teste' });
   });
+  it('Testa se o retorno da atualização de um produto está correta', async function () {
+    sinon.stub(connection, 'execute')
+      .resolves([{ insertId: 1 }]);
+
+    const products = await productsModel.updateProduct(1, 'teste');
+
+    expect(products).to.be.deep.equal({ id: 1, name: 'teste' });
+  });
+  it('Testa o delete de um produto está correto', async function () {
+    sinon.stub(connection, 'execute')
+      .resolves([{ insertId: 1 }]);
+
+    const products = await productsModel.deleteProduct(1);
+
+    expect(products).to.be.deep.equal({ id: 1 });
+  });
+
   afterEach(function () {
     sinon.restore();
   });

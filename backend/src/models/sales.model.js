@@ -41,12 +41,12 @@ const deleteSale = async (id) => {
   return { id };
 };
 
-const updateSale = async (saleId, sale) => {
+const updateSale = async (saleId, productId, quantity) => {
   await connection.execute(
     'UPDATE sales_products SET quantity = ? WHERE sale_id = ? AND product_id = ?',
-    [sale.quantity, saleId, sale.productId],
+    [quantity, saleId, productId],
   );
-  return sale;
+  return { saleId, productId, quantity }; 
 };
 
 module.exports = {

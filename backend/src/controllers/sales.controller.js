@@ -24,9 +24,10 @@ const deleteSale = async (req, res) => {
 };
 
 const updateSales = async (req, res) => {
-  const { id } = req.params;
-  const { body } = req;
-  const sale = await salesServices.updateSales(id, body);
+  const { id, productId } = req.params;
+  const { quantity } = req.body;
+
+  const sale = await salesServices.updateSales(id, productId, quantity);
   return res.status(sale.status).json(sale.data);
 };
 

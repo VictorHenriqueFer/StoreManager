@@ -59,6 +59,30 @@ describe('Testa o service de produtos', function () {
     
     expect(products.data).to.be.deep.equal({ status: 201 });
   });
+  it('Testa se o retorno do status code da updateProduct está correto', async function () {
+    sinon.stub(productsModel, 'updateProduct')
+      .resolves({ status: 200 });
+    
+    const products = await productsServices.updateProduct(1, 'teste');
+    
+    expect(products.data).to.be.deep.equal({ status: 200 });
+  });
+  it('Testa se o retorno da função updateProduct está correto', async function () {
+    sinon.stub(productsModel, 'updateProduct')
+      .resolves(productsFromServiceId);
+    
+    const products = await productsServices.updateProduct(1, 'teste');
+    
+    expect(products.data).to.be.deep.equal(productsFromServiceId);
+  });
+  it('Testa se o retorno da função deleteProduct está correto', async function () {
+    sinon.stub(productsModel, 'deleteProduct')
+      .resolves({ status: 204 });
+    
+    const products = await productsServices.deleteProduct(1);
+    
+    expect(products).to.be.deep.equal({ status: 204 });
+  });
 
   afterEach(function () {
     sinon.restore();

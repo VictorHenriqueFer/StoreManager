@@ -46,6 +46,30 @@ describe('Testa se o controller retorna todos os produtos', function () {
     expect(res.status).to.have.been.calledWith(201);
     expect(res.json).to.have.been.calledWith(productsFromServiceInsert);
   });
+  it('Testa se o controller atualiza um produto', async function () {
+    sinon.stub(productsServices, 'updateProduct')
+      .resolves({ status: 200, data: productsFromServiceId });
+    const req = { params: { id: 1 }, body: { name: 'Martelo de Thor' } };
+    const res = {
+      status: sinon.stub().returnsThis(),
+      json: sinon.stub().returns(),
+    };
+    await productsController.updateProduct(req, res);
+    expect(res.status).to.have.been.calledWith(200);
+    expect(res.json).to.have.been.calledWith(productsFromServiceId);
+  });
+  it('Testa se o controller deleta um produto', async function () {
+    sinon.stub(productsServices, 'deleteProduct')
+      .resolves({ status: 204 });
+    const req = { params: { id: 1 } };
+    const res = {
+      status: sinon.stub().returnsThis(),
+      json: sinon.stub().returns(),
+    };
+    await productsController.deleteProduct(req, res);
+    expect(res.status).to.have.been.calledWith(204);
+    expect(res.json).to.have.been.calledWith();
+  });
   afterEach(function () {
     sinon.restore();
   });

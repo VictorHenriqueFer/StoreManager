@@ -16,7 +16,7 @@ const insertProduct = async (name) => {
 };
 
 const updateProduct = async (id, name) => {
-  const product = await productsModel.updateProduct(id, name);
+  const product = await productsModel.updateProduct(Number(id), name);
   return { status: 200, data: product };
 };
 

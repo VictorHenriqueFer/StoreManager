@@ -1,6 +1,5 @@
 const route = require('express').Router();
 const { salesController } = require('../controllers');
-const validateProductsDb = require('../middlewares/validateProductsDb');
 const validateSales = require('../middlewares/validateSales');
 const validateSalesProducts = require('../middlewares/validateSalesProducts');
 const validateUpdateSales = require('../middlewares/validateUpdateSales');
@@ -22,8 +21,7 @@ route.delete(
 );
 
 route.put(
-  ':/id/products/:productId/quantity',
-  validateProductsDb,
+  '/:id/products/:productId/quantity',
   validateUpdateSales,
   salesController.updateSales,
 );

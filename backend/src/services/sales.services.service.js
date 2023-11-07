@@ -25,10 +25,15 @@ const deleteSale = async (id) => {
   return { status: 204 };
 };
 
-const updateSales = async (id, sales) => {
-  const salesObj = sales.map((sale) => salesModel.updateSale(id, sale));
-  await Promise.all(salesObj);
-  return { status: 200, data: { id, sales } };
+const updateSales = async (id, productId, quantity) => {
+  const sales = await salesModel.findById(id);
+  await salesModel.updateSale(id, productId, quantity);
+  const products = sales.find((product) => product.productId === Number(productId));
+  return { status: 200,
+    data: { saleId: Number(id),
+      productId: Number(productId),
+      quantity,
+      date: products.date } };
 };
 
 module.exports = {

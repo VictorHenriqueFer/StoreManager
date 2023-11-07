@@ -37,10 +37,22 @@ const productsFromServiceInsert = {
   name: 'Traje de encolhimento',
 };
 
+const productsFromServiceUpdate = [
+  {
+    id: 1,
+    name: 'Martelo de Batman',
+  },
+  {
+    id: 2,
+    name: 'Traje de encolhimento',
+  },
+];
+
 module.exports = {
   productsFromModel,
   productsFromId,
   productsFromService,
   productsFromServiceId,
   productsFromServiceInsert,
+  productsFromServiceUpdate,
 };

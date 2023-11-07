@@ -46,6 +46,33 @@ describe('Testa o service de vendas', function () {
 
     expect(sales.data).to.be.deep.equal({ id: 1, itemsSold: salesFromServiceInsert });
   });
+  it('Testa se o retorno da função deleteSale está correto', async function () {
+    sinon.stub(salesModel, 'deleteSale')
+      .resolves({ status: 204 });
+
+    const sales = await salesServices.deleteSale(1);
+
+    expect(sales.status).to.be.equal(204);
+  });
+  it('Testa se o retorno da função updateSales está correto', async function () {
+    sinon.stub(salesModel, 'updateSale')
+      .resolves({ status: 200 });
+
+    const sales = await salesServices.updateSales(1, 1, 1);
+
+    expect(sales.status).to.be.equal(200);
+  });
+
+  it('Testa se não encontrar o id retorna Sale not found', async function () {
+    sinon.stub(salesModel, 'findById')
+      .resolves([]);
+
+    const sales = await salesServices.findById(1);
+
+    expect(sales.data).to.be.deep.equal({ message: 'Sale not found' });
+    expect(sales.status).to.be.equal(404);
+  });
+
   afterEach(function () {
     sinon.restore();
   });

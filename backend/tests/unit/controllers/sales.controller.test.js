@@ -46,6 +46,29 @@ describe('Testa se o controller retorna todos os produtos', function () {
     expect(res.status).to.have.been.calledWith(201);
     expect(res.json).to.have.been.calledWith(salesFromServiceInsert);
   });
+  it('Testa se o controller deleta um produto', async function () {
+    sinon.stub(salesServices, 'deleteSale')
+      .resolves({ status: 204 });
+    const req = { params: { id: 1 } };
+    const res = {
+      status: sinon.stub().returnsThis(),
+      json: sinon.stub().returns(),
+    };
+    await salesController.deleteSale(req, res);
+    expect(res.status).to.have.been.calledWith(204);
+  });
+  it('Testa se o controller atualiza um produto', async function () {
+    sinon.stub(salesServices, 'updateSales')
+      .resolves({ status: 200, data: salesFromServiceId });
+    const req = { params: { id: 1, productId: 1 }, body: { quantity: 10 } };
+    const res = {
+      status: sinon.stub().returnsThis(),
+      json: sinon.stub().returns(),
+    };
+    await salesController.updateSales(req, res);
+    expect(res.status).to.have.been.calledWith(200);
+    expect(res.json).to.have.been.calledWith(salesFromServiceId);
+  });
   afterEach(function () {
     sinon.restore();
   });

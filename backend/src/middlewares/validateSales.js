@@ -1,7 +1,7 @@
 const validateSales = async (req, res, next) => {
   const itemsSold = req.body;
   const arrayProductsId = itemsSold.every((item) => item.productId);
-  if (!arrayProductsId) return res.status(404).json({ message: '"productId" is required,BIRL11' });
+  if (!arrayProductsId) return res.status(400).json({ message: '"productId" is required' });
 
   const validationValueQuantity = itemsSold.map((item) => item.quantity <= 0);
   if (validationValueQuantity.includes(true)) {
@@ -10,7 +10,7 @@ const validateSales = async (req, res, next) => {
   }
   
   const arrayItemSold = itemsSold.every((item) => item.quantity);
-  if (!arrayItemSold) return res.status(404).json({ message: '"quantity" is required,BIRL22' });
+  if (!arrayItemSold) return res.status(400).json({ message: '"quantity" is required' });
 
   next();
 };
